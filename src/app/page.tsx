@@ -4,6 +4,10 @@ import Stores from "@/Component/Stores"
 import { categoryDataFetch } from "@/lib/CategoryDataFetch";
 import Blogs from "@/Component/Blogs/Blogs";
 import HomeProducts from "@/Component/Home/HomeProduct/HomeProducts"
+import AboutFreshProduct from "@/Component/Home/AboutFreshProduct";
+import CustReview from "@/Component/Review/CustReview";
+import Offer from "@/Component/Offer/Offer";
+
 interface CategoryType {
   id: string;
   categoryName: string;
@@ -99,6 +103,15 @@ export default async function Hero() {
           <HomeProducts data={categoric.categories} product={data.products} />
         )}
 
+      </div>
+      <div>
+        <AboutFreshProduct></AboutFreshProduct>
+      </div>
+      <div>
+        <Offer></Offer>
+      </div>
+      <div>
+        <CustReview></CustReview>
       </div>
       <div>
         <Blogs></Blogs>

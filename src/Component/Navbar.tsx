@@ -112,7 +112,7 @@ const Navbar = () => {
                                         <div className="flex items-center gap-1">
                                             <div className="indicator">
                                                 <FaShoppingCart className="text-2xl" />
-                                                <span className="badge badge-sm w-5 h-5 text-white font-bold indicator-item bg-fh-primary rounded-full">
+                                                <span className="badge badge-sm w-5 h-5 font-bold indicator-item bg-fh-primary rounded-full">
                                                     {cartAdd.length}
                                                 </span>
                                             </div>
@@ -125,7 +125,7 @@ const Navbar = () => {
                                     <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                                         {cartAdd.map((myProduct: ProductType) => (
                                             <li key={myProduct.id} className="my-1">
-                                                <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 z-20">
+                                                <div className="bg-gray-100 p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 z-20">
                                                     <div className="w-16 bg-gray-200 flex items-center justify-center">
                                                         <img className="w-50" src={myProduct.images[0]} alt="product" />
                                                     </div>
@@ -136,7 +136,7 @@ const Navbar = () => {
                                                         <div className="flex items-center justify-between">
                                                             <button
                                                                 onClick={() => handleCardDelete(myProduct)}
-                                                                className="px-3 py-1 bg-fh-primary text-white text-sm rounded hover:bg-red-800 transition-colors"
+                                                                className="px-3 py-1 text-sm rounded hover:bg-red-800 hover:text-white transition-colors"
                                                             >
                                                                 X
                                                             </button>
