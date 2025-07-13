@@ -1,6 +1,6 @@
 "use client";
-import CardProduct from "@/app/products/[id]/components/CardProduct";
-import SectionHeader from "@/components/sectionHeader/SectionHeader";
+import Card from "@/app/Product/[id]/component/Card";
+import SecHeader from "@/Component/SecHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -47,7 +47,7 @@ const FreshProducts = ({ data, product }: FreshProductsProps) => {
             <div className="container relative">
                 <div className="">
                     <Image
-                        src={"/assets/pata.png"}
+                        src={"/assets/images/pata.png"}
                         width={60}
                         height={10}
                         className="absolute top-[-100px] md:right-30 right-5 z-11"
@@ -56,7 +56,7 @@ const FreshProducts = ({ data, product }: FreshProductsProps) => {
                 </div>
                 <div className="">
                     <Image
-                        src={"/assets/pata.png"}
+                        src={"/assets/images/pata.png"}
                         width={60}
                         height={10}
                         className="absolute top-[-50px] md:left-25 z-11 rotate-45"
@@ -64,7 +64,7 @@ const FreshProducts = ({ data, product }: FreshProductsProps) => {
                     />
                 </div>
 
-                <SectionHeader
+                <SecHeader
                     subTitle="Our Products"
                     title="Our Fresh Products"
                     description="We pride ourselves on offering a wide variety of fresh and flavorful fruits, vegetables, and salad ingredients."
@@ -72,10 +72,10 @@ const FreshProducts = ({ data, product }: FreshProductsProps) => {
 
                 <Cate data={data} handleCategory={handleCategory} active={active} />
 
-                {/* Product List */}
+
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
                     {(active ? category : defaultProduct).map((prod) => (
-                        <CardProduct key={prod.id} product={prod} />
+                        <Card key={prod.id} product={prod} />
                     ))}
                 </div>
 

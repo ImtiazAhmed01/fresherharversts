@@ -25,14 +25,16 @@ const Cards = ({ product }: ProductCardProps) => {
             </figure>
             <div className="card-body px-0 pb-1 items-center mt-[-10px] text-center mb-0">
                 <h2 className="text-lg font-medium">{productName}</h2>
-                <p className="text-fh-gray-100 text-lg">${price}/kg</p>
+                <p className="text-gray-100 text-lg">${price}/kg</p>
                 <div className="card-actions w-full">
                     <Link
                         href={`/products/${product.id}`}
-                        className="btn btn-sm md:btn-md group-hover:bg-fh-primary duration-300 ease-in-out btn-block border border-fh-gray-50"
+                        className="btn btn-sm md:btn-md btn-outline btn-block hover:bg-orange-600 hover:text-white"
                     >
                         Add To Cart
                     </Link>
+
+
                 </div>
             </div>
         </div>

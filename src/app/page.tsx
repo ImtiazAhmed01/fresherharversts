@@ -1,9 +1,9 @@
 import BannerSalad from "@/Component/BannerSalad";
 import Image from "next/image";
 import Stores from "@/Component/Stores"
-import { fetchProducts } from "@/lib/CategoryDataFetch";
+import { categoryDataFetch } from "@/lib/CategoryDataFetch";
 import Blogs from "@/Component/Blogs/Blogs";
-
+import HomeProducts from "@/Component/Home/HomeProduct/HomeProducts"
 interface CategoryType {
   id: string;
   categoryName: string;
@@ -19,8 +19,13 @@ interface ProductType {
   categoryId: string;
 }
 export default async function Hero() {
-  // let categories = await CategoryDataFetch();
-  let products = await fetchProducts()
+  let categoric = await categoryDataFetch();
+  let res = await fetch(`http://localhost:3001/api/v1/products`);
+  let data = await res.json();
+  console.log("Categories:", categoric?.categories);
+  console.log("Products:", data.products);
+
+
   return (
     <div>
       <section className="px-12 pb-12 pt-40 relative">
@@ -89,6 +94,12 @@ export default async function Hero() {
         <div>
         </div>
       </section>
+      <div>
+        {categoric?.categories && data?.products && (
+          <HomeProducts data={categoric.categories} product={data.products} />
+        )}
+
+      </div>
       <div>
         <Blogs></Blogs>
       </div>

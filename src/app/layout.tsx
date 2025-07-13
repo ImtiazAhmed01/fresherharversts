@@ -29,14 +29,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ProductProvider>
-          <CookiesProvider>
-            <Navbar></Navbar>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <CookiesProvider>
+          <ProductProvider>
+            <Navbar />
             {children}
-            <Footer></Footer>
-          </CookiesProvider>
-        </ProductProvider>
+            <Footer />
+          </ProductProvider>
+        </CookiesProvider>
       </body>
     </html>
   );

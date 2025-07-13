@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
-// import SingIn from "../auth/SingIn";
+import SingIn from "../Component/authen/SignIn";
 
 interface ProductType {
     id: string;
@@ -155,15 +155,27 @@ const Navbar = () => {
                                     Sign Out
                                 </button>
                             ) : (
-                                <button
-                                    onClick={() => {
-                                        const modal = document.getElementById("login") as HTMLDialogElement;
-                                        if (modal) modal.showModal();
-                                    }}
-                                    className="btn btn-sm md:btn-md btn-outline"
-                                >
-                                    Sign in
-                                </button>
+                                <div className="flex gap-5">
+                                    <button
+                                        onClick={() => {
+                                            const modal = document.getElementById("login") as HTMLDialogElement;
+                                            if (modal) modal.showModal();
+                                        }}
+                                        className="btn btn-sm md:btn-md btn-outline "
+                                    >
+                                        Sign in
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            const modal = document.getElementById("register") as HTMLDialogElement;
+                                            if (modal) modal.showModal();
+                                        }}
+                                        className="btn btn-sm md:btn-md btn-outline"
+                                    >
+                                        Register
+                                    </button>
+                                </div>
+
                             )}
                         </div>
                     </div>
@@ -175,7 +187,7 @@ const Navbar = () => {
                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             </form>
                             <div className="py-2">
-                                {/* <SingIn /> */}
+                                <SingIn />
                             </div>
                         </div>
                     </dialog>
