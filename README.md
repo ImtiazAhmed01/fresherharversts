@@ -34,3 +34,63 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Frontend Development Task Using Next.js
+
+## 🧾 Project Overview
+
+This is a frontend development task for **SM Technology**. The goal is to build a responsive, pixel-perfect frontend application using **Next.js** and **TypeScript**, based on provided **Figma designs** and integrated with backend APIs using **Redux RTK Query** and **Postman API documentation**.
+
+---
+
+## 📋 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Technology Stack](#-technology-stack)
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [API Integration](#-api-integration)
+- [Testing](#-testing)
+- [Deployment](#-deployment)
+- [Project Setup Documentation](#-project-setup-documentation)
+- [Project Structure](#-project-structure)
+- [Troubleshooting](#-troubleshooting)
+- [Contributors](#-contributors)
+- [License](#-license)
+
+---
+
+## 🧱 Technology Stack
+
+- **Framework**: Next.js (with TypeScript)
+- **Alternative**: React.js
+- **Styling**: Tailwind CSS or equivalent
+- **API Integration**: Redux Toolkit Query (RTK Query)
+- **Design Reference**: Figma
+- **API Reference**: Postman Documentation
+
+---
+
+## ✨ Features
+
+- Pixel-perfect implementation from Figma designs
+- Responsive UI across all devices and browsers
+- API integration via Redux RTK Query
+- Proper loading, error, and success states
+- Modular code structure
+- SEO and performance optimizations (Next.js)
+
+---
+
+## 🚀 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/frontend-task-smtech.git
+cd frontend-task-smtech
+
+# Install dependencies
+npm install
+# or
+yarn install
