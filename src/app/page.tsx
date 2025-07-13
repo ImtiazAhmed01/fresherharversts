@@ -1,17 +1,34 @@
 import BannerSalad from "@/Component/BannerSalad";
 import Image from "next/image";
 import Stores from "@/Component/Stores"
-// import "./hero.css";
+import HomeProducts from "@/Component/Category/HomeProducts";
+import { fetchProducts } from "@/lib/CategoryDataFetch";
 
-const Hero = () => {
+interface CategoryType {
+  id: string;
+  categoryName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ProductType {
+  id: string;
+  productName: string;
+  images: string[];
+  price: number;
+  categoryId: string;
+}
+export default async function Hero() {
+  // let categories = await CategoryDataFetch();
+  let products = await fetchProducts()
   return (
     <section className="px-12 pb-12 pt-40 relative">
       <div className="">
         <Image
           src={"/assets/images/bannerpic.jpg"}
           width={700}
-          height={1000}
-          className="absolute hidden xl:block bottom-1 md:right-0"
+          height={500}
+          className="absolute hidden xl:block bottom-[750px] md:right-0"
           alt="no support image"
         />
 
@@ -68,8 +85,12 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      <div>
+        {/* <HomeProducts data={categories} product={products} /> */}
+        <HomeProducts />
+      </div>
     </section>
   );
 };
 
-export default Hero;
+

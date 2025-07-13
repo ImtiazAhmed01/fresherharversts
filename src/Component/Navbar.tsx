@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -16,19 +17,23 @@ export default function Navbar() {
 
 
     return (
-        <nav className="w-full bg-white">
+        <nav
+            className="w-ful bg-cover"
+            style={{ backgroundImage: "url('https://i.ibb.co/JWNqpJNJ/navbar1.png')" }}>
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                {/* Left: Logo */}
                 <div className="flex items-center gap-2">
-                    <img
-                        src="/logo-icon.png"
-                        alt="Logo"
-                        className="h-6 w-6"
-                    />
+                    <Link href={"/"}>
+                        <Image
+                            src="/assets/images/logo-icon.png"
+                            alt="Logo"
+                            width={6}
+                            height={6}
+                        />
+                    </Link>
                     <span className="text-xl font-bold text-gray-800">Fresh Harvests</span>
                 </div>
 
-                {/* Center: Nav Links */}
+
                 <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
                     <li className="mt-3">
                         <a href="/" className={`hover:text-[#749B3F] ${isActive("/")}`}>
@@ -52,7 +57,7 @@ export default function Navbar() {
                     </li>
                 </ul>
 
-                {/* Right: Icons */}
+
                 <div className="flex -mr-44 items-center gap-5 z-10">
                     <Link href="/favorites" className="flex items-center gap-1 text-gray-600 hover:text-green-700">
                         <img src="https://img.icons8.com/ios-filled/24/like--v1.png" className="w-5 h-5" />
@@ -71,7 +76,7 @@ export default function Navbar() {
                         </button>
                     </Link>
 
-                    {/* Hamburger */}
+
                     <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
                         <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" strokeWidth={2}
                             viewBox="0 0 24 24">
@@ -82,7 +87,7 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Dropdown */}
+
             {menuOpen && (
                 <div className="md:hidden px-4 pb-4">
                     <ul className="flex flex-col gap-3 text-gray-700">
