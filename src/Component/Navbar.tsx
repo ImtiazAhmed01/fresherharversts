@@ -58,7 +58,7 @@ const Navbar = () => {
     const links = (
         <>
             <li><Link href="/">Home</Link></li>
-            <li><Link href="/products">Shop</Link></li>
+            <li><Link href="/Product">Shop</Link></li>
             <li><Link href="/">About Us</Link></li>
             <li><Link href="/blog/id">Blog</Link></li>
             {(token || user) && (
@@ -72,7 +72,7 @@ const Navbar = () => {
             <div className={`bg-fh-gray-20 ${scroll ? "sticky w-full" : ""}`}>
                 <div className="container mx-auto">
                     <div className="navbar py-4">
-                        {/* Navbar Start */}
+
                         <div className="navbar-start">
                             <div className="dropdown">
                                 <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -88,18 +88,17 @@ const Navbar = () => {
                                 </ul>
                             </div>
                             <Link href="/">
-                                <Image src="/assets/logo.png" width={170} height={80} alt="logo image" />
+                                <Image src="/assets/images/logo.png" width={170} height={80} alt="logo image" />
                             </Link>
                         </div>
 
-                        {/* Navbar Center */}
                         <div className="navbar-center hidden lg:flex">
                             <ul className="menu menu-horizontal px-1 space-x-7">{links}</ul>
                         </div>
 
                         {/* Navbar End */}
                         <div className="navbar-end space-x-6">
-                            <div className="lg:flex items-center gap-1 hidden lg:block">
+                            <div className=" items-center gap-1 hidden lg:block">
                                 <MdOutlineFavorite className="text-xl" />
                                 <span>Favorites</span>
                             </div>

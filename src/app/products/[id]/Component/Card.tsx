@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 
 interface ProductType {
     _id: string;
+    id: string;
     productName: string;
-    images: string[]; // assuming it's an array of image URLs
+    images: string[];
     price: number;
     stock?: number;
     description?: string;
@@ -23,7 +24,7 @@ const Card = ({ product }: CardProductProps) => {
     const { productName, images, price } = product;
 
     const handleAddProduct = (productItem: ProductType) => {
-        const alreadyAdded = cartAdd.find((cart: ProductType) => cart._id === productItem._id);
+        const alreadyAdded = cartAdd.find((cart: ProductType) => cart.id === productItem.id);
         if (!alreadyAdded) {
             setCartAdd([...cartAdd, productItem]);
         } else {

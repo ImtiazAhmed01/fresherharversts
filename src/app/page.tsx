@@ -66,7 +66,7 @@ export default async function Hero() {
                   At Fresh Harvests, we are passionate about providing you with
                   the freshest and most flavorful fruits and vegetables
                 </p>
-                <button className="btn rounded-lg  bg-fh-primary text-lg py-5 text-white px-8">
+                <button className="btn rounded-lg  bg-orange-600 text-lg py-5 text-white px-8">
                   shop Now
                 </button>
                 <BannerSalad />

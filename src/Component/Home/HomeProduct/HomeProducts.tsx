@@ -1,5 +1,5 @@
 "use client";
-import Card from "@/app/Product/[id]/component/Card";
+import Card from "@/app/products/[id]/Component/Card";
 import SecHeader from "@/Component/SecHeader";
 import Image from "next/image";
 import Link from "next/link";
