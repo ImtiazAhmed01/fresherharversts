@@ -1,106 +1,190 @@
-'use client';
+"use client";
+import { ProductContext } from "@/ContextApi/ProductContext";
+import { useCookies } from "next-client-cookies";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdOutlineFavorite } from "react-icons/md";
+// import SingIn from "../auth/SingIn";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+interface ProductType {
+    id: string;
+    productName: string;
+    images: string[];
+}
 
-export default function Navbar() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [activePath, setActivePath] = useState("");
+const Navbar = () => {
+    const router = useRouter();
+    const pathname = usePathname();
+
+    const [token, setToken] = useState<string | null>(null);
+    const [user, setUser] = useState<string | null>(null);
+    const [scroll, setScroll] = useState<boolean>(false);
+    const cookies = useCookies();
+    const { cartAdd, setCartAdd } = useContext(ProductContext);
+
+    const handleSignOut = () => {
+        cookies.remove("token");
+        cookies.remove("user");
+
+        toast.success("Successfully signed out");
+        router.push("/");
+        router.refresh();
+        setUser(null);
+        setToken(null);
+    };
 
     useEffect(() => {
-        setActivePath(window.location.pathname);
+        const token = cookies.get("token");
+        const person = cookies.get("user");
+        setToken(token || null);
+        setUser(person || null);
     }, []);
 
-    const isActive = (path: string) =>
-        activePath === path ? "border-b-2 border-[#749B3F]" : "";
+    useEffect(() => {
+        const handleScroll = () => setScroll(window.scrollY > 5);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
+    const handleCardDelete = (det: ProductType) => {
+        const deleteProduct = cartAdd.filter((cart: ProductType) => cart.id !== det.id);
+        setCartAdd(deleteProduct);
+    };
 
-    return (
-        <nav
-            className="w-ful bg-cover"
-            style={{ backgroundImage: "url('https://i.ibb.co/JWNqpJNJ/navbar1.png')" }}>
-            <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                    <Link href={"/"}>
-                        <Image
-                            src="/assets/images/logo-icon.png"
-                            alt="Logo"
-                            width={6}
-                            height={6}
-                        />
-                    </Link>
-                    <span className="text-xl font-bold text-gray-800">Fresh Harvests</span>
-                </div>
+    const links = (
+        <>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/products">Shop</Link></li>
+            <li><Link href="/">About Us</Link></li>
+            <li><Link href="/blog/id">Blog</Link></li>
+            {(token || user) && (
+                <li><Link href="/admin-dashboard">Dashboard</Link></li>
+            )}
+        </>
+    );
 
+    if (!pathname.includes("dashboard")) {
+        return (
+            <div className={`bg-fh-gray-20 ${scroll ? "sticky w-full" : ""}`}>
+                <div className="container mx-auto">
+                    <div className="navbar py-4">
+                        {/* Navbar Start */}
+                        <div className="navbar-start">
+                            <div className="dropdown">
+                                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                            d="M4 6h16M4 12h8m-8 6h16" />
+                                    </svg>
+                                </div>
+                                <ul tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-x-10">
+                                    {links}
+                                </ul>
+                            </div>
+                            <Link href="/">
+                                <Image src="/assets/logo.png" width={170} height={80} alt="logo image" />
+                            </Link>
+                        </div>
 
-                <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
-                    <li className="mt-3">
-                        <a href="/" className={`hover:text-[#749B3F] ${isActive("/")}`}>
-                            Home
-                        </a>
-                    </li>
-                    <li className="mt-3">
-                        <a href="/about" className={`hover:text-[#749B3F] ${isActive("/about")}`}>
-                            About
-                        </a>
-                    </li>
-                    <li className="mt-3">
-                        <a href="/portfolio" className={`hover:text-[#749B3F] ${isActive("/portfolio")}`}>
-                            Portfolio
-                        </a>
-                    </li>
-                    <li className="mt-3">
-                        <a href="/blog" className={`hover:text-[#749B3F]  ${isActive("/blog")}`}>
-                            Blog
-                        </a>
-                    </li>
-                </ul>
+                        {/* Navbar Center */}
+                        <div className="navbar-center hidden lg:flex">
+                            <ul className="menu menu-horizontal px-1 space-x-7">{links}</ul>
+                        </div>
 
+                        {/* Navbar End */}
+                        <div className="navbar-end space-x-6">
+                            <div className="lg:flex items-center gap-1 hidden lg:block">
+                                <MdOutlineFavorite className="text-xl" />
+                                <span>Favorites</span>
+                            </div>
 
-                <div className="flex -mr-44 items-center gap-5 z-10">
-                    <Link href="/favorites" className="flex items-center gap-1 text-gray-600 hover:text-green-700">
-                        <img src="https://img.icons8.com/ios-filled/24/like--v1.png" className="w-5 h-5" />
-                        <span className="hidden md:inline">Favorites</span>
-                    </Link>
+                            {/* Cart Drawer */}
+                            <div className="drawer w-auto z-20 drawer-end">
+                                <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+                                <div className="drawer-content">
+                                    <label htmlFor="my-drawer-4" className="drawer-button">
+                                        <div className="flex items-center gap-1">
+                                            <div className="indicator">
+                                                <FaShoppingCart className="text-2xl" />
+                                                <span className="badge badge-sm w-5 h-5 text-white font-bold indicator-item bg-fh-primary rounded-full">
+                                                    {cartAdd.length}
+                                                </span>
+                                            </div>
+                                            <span className="hidden lg:block ml-1">Cart</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div className="drawer-side">
+                                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay" />
+                                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                                        {cartAdd.map((myProduct: ProductType) => (
+                                            <li key={myProduct.id} className="my-1">
+                                                <div className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 z-20">
+                                                    <div className="w-16 bg-gray-200 flex items-center justify-center">
+                                                        <img className="w-50" src={myProduct.images[0]} alt="product" />
+                                                    </div>
+                                                    <div className="p-1 flex items-center justify-between">
+                                                        <h3 className="font-semibold text-gray-800 mb-1">
+                                                            {myProduct.productName}
+                                                        </h3>
+                                                        <div className="flex items-center justify-between">
+                                                            <button
+                                                                onClick={() => handleCardDelete(myProduct)}
+                                                                className="px-3 py-1 bg-fh-primary text-white text-sm rounded hover:bg-red-800 transition-colors"
+                                                            >
+                                                                X
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
 
-                    <Link href="/cart" className="relative flex items-center gap-1 text-gray-600 hover:text-green-700">
-                        <img src="https://img.icons8.com/ios-filled/24/shopping-cart.png" className="w-5 h-5" />
-                        <span className="hidden md:inline">Cart</span>
+                            {/* Auth Button */}
+                            {(token || user) ? (
+                                <button onClick={handleSignOut} className="btn btn-sm md:btn-md btn-outline">
+                                    Sign Out
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        const modal = document.getElementById("login") as HTMLDialogElement;
+                                        if (modal) modal.showModal();
+                                    }}
+                                    className="btn btn-sm md:btn-md btn-outline"
+                                >
+                                    Sign in
+                                </button>
+                            )}
+                        </div>
+                    </div>
 
-                    </Link>
-
-                    <Link href="/signin">
-                        <button className="px-4 py-1 border border-white b-white text-white font-medium rounded-md hover:bg-green-50">
-                            Sign in
-                        </button>
-                    </Link>
-
-
-                    <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-                        <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" strokeWidth={2}
-                            viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+                    {/* Sign In Modal */}
+                    <dialog id="login" className="modal">
+                        <div className="modal-box max-w-md">
+                            <form method="dialog">
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div className="py-2">
+                                {/* <SingIn /> */}
+                            </div>
+                        </div>
+                    </dialog>
                 </div>
             </div>
+        );
+    }
 
+    return null;
+};
 
-            {menuOpen && (
-                <div className="md:hidden px-4 pb-4">
-                    <ul className="flex flex-col gap-3 text-gray-700">
-                        <li><Link href="/" className={`hover:text-green-700 ${isActive("/")}`}>Home</Link></li>
-                        <li><Link href="/shop" className={`hover:text-green-700 ${isActive("/shop")}`}>Shop</Link></li>
-                        <li><Link href="/about" className={`hover:text-green-700 ${isActive("/about")}`}>About us</Link></li>
-                        <li><Link href="/blog" className={`hover:text-green-700 ${isActive("/blog")}`}>Blog</Link></li>
-                        <li><Link href="/favorites" className="hover:text-green-700">Favorites</Link></li>
-                        <li><Link href="/cart" className="hover:text-green-700">Cart</Link></li>
-                        <li><Link href="/signin" className="hover:text-green-700">Sign in</Link></li>
-                    </ul>
-                </div>
-            )}
-        </nav>
-    );
-}
+export default Navbar;

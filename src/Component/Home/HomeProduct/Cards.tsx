@@ -1,28 +1,26 @@
 import Link from "next/link";
-import React from "react";
 
-interface Product {
+interface ProductType {
     id: string;
     productName: string;
-    images: string;
+    images: string[];
     price: number;
-    categoryId?: string;
 }
 
-interface Props {
-    product: Product;
+interface ProductCardProps {
+    product: ProductType;
 }
 
-export default function ProdCard({ product }: Props) {
+const Cards = ({ product }: ProductCardProps) => {
     const { productName, images, price } = product;
 
     return (
         <div className="card group cursor-pointer bg-base-100 md:pt-3 pt-2 rounded-xl shadow-sm mb-2 md:p-3 p-2 py-0">
             <figure className="p-10 bg-fh-gray-20 rounded-xl">
                 <img
-                    src={images}
+                    src={images?.[0] || "/placeholder.png"}
                     alt={productName}
-                    className="rounded-xl h-[40px] md:h-[100px] group-hover:scale-125 transition duration-300 ease-in-out"
+                    className="rounded-xl h-[100px] md:h-[140px] group-hover:scale-125 transition duration-300 ease-in-out object-contain"
                 />
             </figure>
             <div className="card-body px-0 pb-1 items-center mt-[-10px] text-center mb-0">
@@ -30,8 +28,8 @@ export default function ProdCard({ product }: Props) {
                 <p className="text-fh-gray-100 text-lg">${price}/kg</p>
                 <div className="card-actions w-full">
                     <Link
-                        href={""}
-                        className="btn btn-sm md:btn- group-hover:bg-fh-primary duration-300 ease-in-out btn-block border border-fh-gray-50"
+                        href={`/products/${product.id}`}
+                        className="btn btn-sm md:btn-md group-hover:bg-fh-primary duration-300 ease-in-out btn-block border border-fh-gray-50"
                     >
                         Add To Cart
                     </Link>
@@ -39,6 +37,6 @@ export default function ProdCard({ product }: Props) {
             </div>
         </div>
     );
-}
+};
 
-
+export default Cards;
