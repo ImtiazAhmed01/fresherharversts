@@ -50,8 +50,8 @@ This is a frontend development task for **SM Technology**. The goal is to build 
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/frontend-task-smtech.git
-cd frontend-task-smtech
+git clone https://github.com/ImtiazAhmed01/fresherharversts.git
+cd fresherharversts
 
 # Install dependencies
 npm install
