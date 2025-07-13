@@ -2,6 +2,7 @@ import Link from "next/link";
 
 interface ProductType {
     id: string;
+    _id: string;
     productName: string;
     images: string[];
     price: number;
@@ -28,7 +29,7 @@ const Cards = ({ product }: ProductCardProps) => {
                 <p className="text-gray-100 text-lg">${price}/kg</p>
                 <div className="card-actions w-full">
                     <Link
-                        href={`/products/${product.id}`}
+                        href={`/api/v1/products/${product._id}`}
                         className="btn btn-sm md:btn-md btn-outline btn-block hover:bg-orange-600 hover:text-white"
                     >
                         Add To Cart

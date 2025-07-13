@@ -58,7 +58,7 @@ const Navbar = () => {
     const links = (
         <>
             <li><Link href="/">Home</Link></li>
-            <li><Link href="/Product">Shop</Link></li>
+            <li><Link href="/products">Shop</Link></li>
             <li><Link href="/">About Us</Link></li>
             <li><Link href="/blog/id">Blog</Link></li>
             {(token || user) && (
@@ -148,7 +148,7 @@ const Navbar = () => {
                                 </div>
                             </div>
 
-                            {/* Auth Button */}
+
                             {(token || user) ? (
                                 <button onClick={handleSignOut} className="btn btn-sm md:btn-md btn-outline">
                                     Sign Out

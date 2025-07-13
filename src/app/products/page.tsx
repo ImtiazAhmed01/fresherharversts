@@ -1,14 +1,16 @@
 import Card from "./[id]/Component/Card";
 
 interface ProductType {
+    _id: string;
     id: string;
+    products: string;
     productName: string;
     images: string[]; // Assuming it's an array
     price: number;
     description?: string;
     stock?: number;
     categoryId?: string;
-    [key: string]: any; // Allow additional dynamic fields
+    [key: string]: any;
 }
 
 interface APIResponse {
@@ -28,7 +30,7 @@ const Page = async () => {
         <div className="mb-20 mt-8">
             <div className="container">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                    {data.data.map((product) => (
+                    {data.products.map((product) => (
                         <Card product={product} key={product.id} />
                     ))}
                 </div>

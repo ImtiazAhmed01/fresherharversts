@@ -24,7 +24,7 @@ const Card = ({ product }: CardProductProps) => {
     const { productName, images, price } = product;
 
     const handleAddProduct = (productItem: ProductType) => {
-        const alreadyAdded = cartAdd.find((cart: ProductType) => cart.id === productItem.id);
+        const alreadyAdded = cartAdd.find((cart: ProductType) => cart._id === productItem._id);
         if (!alreadyAdded) {
             setCartAdd([...cartAdd, productItem]);
         } else {
@@ -52,7 +52,7 @@ const Card = ({ product }: CardProductProps) => {
                         Add To Cart
                     </button>
                     <Link
-                        href={`/products/${product._id}`}
+                        href={`/api/v1/products/${product._id}`}
                         className="text-center text-fh-primary text-md font-medium w-full underline"
                     >
                         Details

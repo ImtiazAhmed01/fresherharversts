@@ -2,6 +2,7 @@ import Card from "./Card";
 
 interface Product {
     _id: string;
+    id: string;
     productName: string;
     images: string[];
     price: number;
